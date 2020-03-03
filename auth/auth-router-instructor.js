@@ -6,6 +6,16 @@ const Instructors = require('./auth-model-instructor.js');
 
 const secrets = require('../database/config/secrets');
 
+router.get('/instructors', (req,res) => {
+  Instructors.find()
+    .then(instructors => {
+      res.status(200).json(instructors);
+    })
+    .catch(err => {
+      res.status(404).json({message: 'instructors not found'})
+    })
+}
+
 router.post('/register', (req, res) => {
   // implement registration
   let user = req.body;

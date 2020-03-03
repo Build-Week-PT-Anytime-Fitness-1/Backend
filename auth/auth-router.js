@@ -6,6 +6,16 @@ const Clients = require('./auth-model.js');
 
 const secrets = require('../database/config/secrets');
 
+router.get('/clients', (req,res) => {
+  Clients.find()
+    .then(clients => {
+      res.status(200).json(clients);
+    })
+    .catch(err => {
+      res.status(404).json({message: 'clients not found'})
+    })
+}
+
 router.post('/registerClient', (req, res) => {
   // implement registration
   let user = req.body;
