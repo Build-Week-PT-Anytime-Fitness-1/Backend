@@ -5,24 +5,38 @@ module.exports = {
   find,
   findBy,
   findById,
+  update,
+  remove,
 };
 
 function find() {
-  return db('clients').select('id', 'username');
+  return db('users').select('id', 'username', 'password', 'isInstructor');
 }
 
 function findBy(filter) {
-  return db('clients').where(filter);
+  return db('users').where(filter);
 }
 
-async function add(client) {
-  const [id] = await db('clients').insert(client);
+async function add(user) {
+  const [id] = await db('users').insert(user);
 
   return findById(id);
 }
 
 function findById(id) {
-  return db('clients')
+  return db('users')
     .where({id})
     .first();
 }
+
+function update(id, changes) {
+    return db('users')
+      .where({ id })
+      .update(changes);
+  }
+
+function remove(id) {
+    return db('users')
+      .where('id', id)
+      .del();
+  }

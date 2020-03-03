@@ -14,7 +14,7 @@ router.get('/instructors', (req,res) => {
     .catch(err => {
       res.status(404).json({message: 'instructors not found'})
     })
-}
+})
 
 router.post('/register', (req, res) => {
   // implement registration
@@ -54,8 +54,7 @@ router.post('/login', (req, res) => {
 
 function generateToken(instructor) {
   const payload = {
-    subject: instructor.id, // standard claim = sub
-    username: instructor.username //boolean if not instructor then is client. True by default.
+    instructor
   };
   const secret = secrets.jwtSecret
   const options = {
