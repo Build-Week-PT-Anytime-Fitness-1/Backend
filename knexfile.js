@@ -17,7 +17,7 @@ module.exports = {
         conn.run('PRAGMA foreign_keys = ON', done); // turn on FK enforcement
       },
   },
-};
+},
 
 
 production: {
