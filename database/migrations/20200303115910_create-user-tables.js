@@ -3,7 +3,7 @@ exports.up = function(knex) {
         tbl.increments();
         tbl.string('username',128).unique().notNullable();
         tbl.string('password',128).notNullable();
-        tbl.boolean('isTrainer');
+        tbl.boolean('isInstructor');
     })
 };
 

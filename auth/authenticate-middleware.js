@@ -1,5 +1,4 @@
 const jwt = require ('jsonwebtoken');
-require('dotenv').config;
 
 
 const secrets = require('../database/config/secrets');

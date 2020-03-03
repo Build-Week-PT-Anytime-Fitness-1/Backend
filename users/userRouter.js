@@ -1,8 +1,7 @@
-const express = require('express');
-const router = express.Router();
-const userDb = require('./userModel');
-//const classDb = require('../classes/classModel');
-const auth = require('../auth/authenticate');
+const router = require('express').Router();
+const userDb = require('../auth/auth-model.js');
+const classDb = require('../classes/classModel');
+const auth = require('../auth/authenticate-middleware');
 
 //GET all users
 
@@ -33,7 +32,7 @@ router.get('/:id', (req,res)=>{
 
 //POST class by instructor
 
-router.post('/:id/post' , auth.authenticate , (req,res) =>{
+router.post('/:id/post' ,  (req,res) =>{
     const { id } = req.params;
     let newPost = req.body;
 
@@ -46,12 +45,12 @@ router.post('/:id/post' , auth.authenticate , (req,res) =>{
             res.status(500).json(err);
             console.log(err);
         })
-})
+});
 
 // PUT changes to existing class by instructor
 
-router.put('/:instructor_id/post/:id' , auth.authenticate , (req,res) =>{
-    const { trainer_id, id } = req.params;
+router.put('/:instructor_id/post/:id' , (req,res) =>{
+    const { instructor_id, id } = req.params;
     let changes = req.body;
 
     classDb.update(id ,{instructor_id:instructor_id, ...changes})
@@ -67,7 +66,7 @@ router.put('/:instructor_id/post/:id' , auth.authenticate , (req,res) =>{
 
 // DELETE class by instructor
 
-router.delete('/:instructor_id/post/:id' , auth.authenticate , (req,res) =>{
+router.delete('/:instructor_id/post/:id' , (req,res) =>{
     const { instructor_id, id } = req.params;
 
     classDb.remove(id)

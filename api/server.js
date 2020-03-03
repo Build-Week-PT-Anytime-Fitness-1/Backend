@@ -7,8 +7,8 @@ const authRouter = require('../auth/auth-router.js'); // For Clients
 //const authRouterInstructor = require('../auth/auth-router-instructor.js'); // For Instructors
 //const instructorsRouter = require('./instructors/instructorsRouter.js');
 //const clientsRouter = require('./clients/clientsRouter.js');
-const userRouter = require('./users/userRouter');
-const classRouter = require('./classes/classRouter.js');
+const userRouter = require('../users/userRouter.js');
+const classRouter = require('../classes/classRouter.js');
 
 const server = express();
 
