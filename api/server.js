@@ -4,10 +4,7 @@ const helmet = require('helmet');
 
 const authenticate = require('../auth/authenticate-middleware.js');
 const authRouter = require('../auth/auth-router.js'); // For Clients
-//const authRouterInstructor = require('../auth/auth-router-instructor.js'); // For Instructors
-//const instructorsRouter = require('./instructors/instructorsRouter.js');
-//const clientsRouter = require('./clients/clientsRouter.js');
-const userRouter = require('../users/userRouter.js');
+
 const classRouter = require('../classes/classRouter.js');
 
 const server = express();
@@ -17,14 +14,11 @@ server.use(cors());
 server.use(express.json());
 
 server.get('/', (req, res) => {
-    res.send('API is up and running!')
+    res.status(200).json({ test: "LISTENING" })
 })
 
 server.use('/api/auth', authRouter); // For Clients and Instructors now
-server.use('/api/users', userRouter);
-//server.use('/api/auth', authRouterInstructor); // For Instructors
-//server.use('/api/instructors', authenticate, instructorsRouter);
-//server.use('/api/clients', authenticate, clientsRouter);
+
 server.use('/api/classes', authenticate, classRouter);
 
 module.exports = server;

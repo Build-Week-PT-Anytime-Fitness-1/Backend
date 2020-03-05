@@ -1,45 +1,63 @@
 const db = require('../database/dbConfig');
 
 module.exports = {
-  find,
-  findByType,
-  findById,
-  add,
-  update,
-  remove,
+  getClasses,
+  getClassesById,
+  addClass,
+  getClassesFilter,
+  updateClass,
+  deleteClass,
+  updateClassSize
 };
 
-function find() {
+function getClasses() {
   return db('classes');
 }
 
-function findByType(type) {
-  return db('classes').where({ type });
+function addClass(class) {
+  return db('classes as c')
+    .insert(post, 'id')
+    .then(ids => {
+      console.log('ADD CLASS', ids)
+      const [id] = ids;
+      return getClassesById(id);
+    })
 }
 
-function findById(id) {
+function getClassesById(id) {
   return db('classes')
-    .where({ id })
-    .first();
+    .select('*')
+    .where({id})
+    .first()
 }
 
-function add(post) {
-    return db('classes')
-      .insert(post)
-      .then(ids => {
-        return findById(ids[0]);
-      });
-  }
+async function updateClass(id, changes) {
+  await db('classes')
+  .where({id})
+  .update(changes)
 
+  return getClassesById(id);
+}
 
-function update(id, changes) {
-    return db('classes')
-        .where({ id })
-        .update(changes);
-    }
+async function updateClassSize(id, changes) {
+  await db('classes')
+  .where({id})
+  .update(changes)
 
-function remove(id) {
-    return db('classes')
-        .where('id', id)
-        .del();
-    }
+  return db('classes')
+  .select('current_attendees')
+  .where({id})
+  .first()
+}
+
+function deleteClass(id) {
+  return db('classes')
+  .where('id', id)
+  .delete()
+}
+
+function getClassesFilter(filter) {
+  return db('classes')
+  .select('*')
+  .where('user_id', filter)
+}

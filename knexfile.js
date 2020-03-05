@@ -1,43 +1,61 @@
-const dbConnection = process.env.DATABASE_URL;
+require('dotenv').config()
 
 module.exports = {
   development: {
-    client: 'sqlite3',
-    connection: { filename: './database/auth.db3' },
+    client: 'sqlite3', // || pg
     useNullAsDefault: true,
-    migrations: {
-      directory: './database/migrations',
-      tableName: 'dbmigrations',
-    },
-    seeds: { directory: './database/seeds' },
-    // add the following
-    pool: {
-      afterCreate: (conn, done) => {
-        // runs after a connection is made to the sqlite engine
-        conn.run('PRAGMA foreign_keys = ON', done); // turn on FK enforcement
-      },
-  },
-},
+    // connection: {
+    //   host: "127.0.0.1",
+    //   port: "5432",
+    //   user: "postgres",
+    //   password: process.env.DB_PASSWORD,
+    //   database: "anytimefitness"
+    // },
 
+    connection: { // use this for for sqlite3 local dev
+      filename: './data/auth.db3'
+
+    },    migrations: {
+      directory: './data/migrations',
+      tableName: 'knex_migrations'
+    },
+    seeds:{
+      directory: './data/seeds'
+    }
+  },
+
+testing: {
+    client: 'pg',
+    useNullAsDefault: true,
+    connection: {
+      host: "127.0.0.1",
+      port: "5432",
+      user: "postgres",
+      password: process.env.DB_PASSWORD,
+      database: 'anytimefitness_test'
+    },
+    migrations: {
+      directory: './data/migrations',
+      tableName: 'knex_migrations'
+    },
+    seeds: {
+      directtory: './data/seeds'
+    }
+  },
 
 production: {
     client: 'pg',
-    connection: {
-      filename: './data/auth.db3'
+    connection: process.env.DATABASE_URL,
+    pool: {
+      min: 2,
+      max: 10
     },
-    useNullAsDefault:true,
-    migrations:{
-      directory:'./data/migrations'
+    migrations: {
+      directory: './data/migrations',
+      tableName: 'knex_migrations'
     },
     seeds: {
       directory: './data/seeds'
-    },
-    // add the following
-    pool: {
-      afterCreate: (conn, done) => {
-        // runs after a connection is made to the sqlite engine
-        conn.run('PRAGMA foreign_keys = ON', done); // turn on FK enforcement
-      },
-    },
-  },
+    }
+  }
 };
