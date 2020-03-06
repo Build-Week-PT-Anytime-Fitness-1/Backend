@@ -14,7 +14,7 @@ function getClasses() {
   return db('classes');
 }
 
-function addClass(class) {
+function addClass(post) {
   return db('classes as c')
     .insert(post, 'id')
     .then(ids => {
