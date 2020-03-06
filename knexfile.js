@@ -13,14 +13,14 @@ module.exports = {
     // },
 
     connection: { // use this for for sqlite3 local dev
-      filename: './data/auth.db3'
+      filename: './database/auth.db3'
 
     },    migrations: {
-      directory: './data/migrations',
+      directory: './database/migrations',
       tableName: 'knex_migrations'
     },
     seeds:{
-      directory: './data/seeds'
+      directory: './database/seeds'
     }
   },
 
@@ -35,11 +35,11 @@ testing: {
       database: 'anytimefitness_test'
     },
     migrations: {
-      directory: './data/migrations',
+      directory: './database/migrations',
       tableName: 'knex_migrations'
     },
     seeds: {
-      directtory: './data/seeds'
+      directtory: './database/seeds'
     }
   },
 
@@ -51,11 +51,11 @@ production: {
       max: 10
     },
     migrations: {
-      directory: './data/migrations',
+      directory: './database/migrations',
       tableName: 'knex_migrations'
     },
     seeds: {
-      directory: './data/seeds'
+      directory: './database/seeds'
     }
   }
 };
