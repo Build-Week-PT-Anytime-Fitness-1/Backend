@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const dbUsers = require('../auth/authModel');
+const dbUsers = require('../auth/auth-model');
 const classDb = require('./classModel');
 const classesData = require('./classModel');
 
