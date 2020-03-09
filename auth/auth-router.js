@@ -33,7 +33,7 @@ router.post('/register', (req, res) => {
 
 router.post('/login', (req, res) => {
   // implement login
-  let {username, password} = req.body;
+  let {username, password, isInstructor} = req.body;
   console.log(`THIS IS REQ.BODY 1`, req.body)
   Users.userLogin({username})
     .first()
