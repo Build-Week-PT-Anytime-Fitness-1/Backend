@@ -4,7 +4,7 @@ const jwt = require('jsonwebtoken');
 
 const Users = require('./auth-model.js');
 
-const secrets = require('../database/config/secrets');
+const jsSecret = require('../database/config/secrets');
 
 router.get('/users', (req, res) => {
   Users.getUsers()
