@@ -49,7 +49,7 @@ router.get('/classes/:id', validateClass, (req, res) => {
 
 })
 
-// adds issue to database with user id
+// adds class to database with user id
 router.post('/:id/classes/', validateUser, (req, res) => {
 
   const { id } = req.params;
@@ -71,7 +71,7 @@ router.put("/classes/:id", validateClass, (req, res) => {
   const changes = { ...req.body}
   classesData.updateClass(id, changes)
   .then(issue => {
-    console.log(`this is ISSUE`, issue)
+    console.log(`this is class`, issue)
     res.status(200).json(issue)
   })
   .catch(({ name, message, code, stack }) => {
@@ -122,7 +122,7 @@ async function validateUser(req, res, next) {
     ? res.status(404).json({ message: "User does not exist!" })
     : !issue ?
     res.status(404).json({ message: "Class does not exist!" })
-    : !issue.issue || !issue.description
+    : !issue.title || !issue.description || !issue.type || !issue.start || !issue.location || !issue.intensity || !issue.max_class
     ? res.status(406).json({ message: "Please make sure the required fields are completed. " })
     : next();
 }
@@ -136,7 +136,7 @@ async function validateClass(req, res, next) {
   const issueCheck = await classDb.getClassesById(id)
 
     !issueCheck
-    ? res.status(404).json({ message: "Issue does not exist!" })
+    ? res.status(404).json({ message: "Class does not exist!" })
     : next();
 }
 
