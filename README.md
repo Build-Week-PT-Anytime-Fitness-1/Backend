@@ -240,7 +240,7 @@ Request: `req.body`
 ```
 Response: `res.body`
 
-Returns JSON object with user entered values, vote count, issue id and user_id fields.
+Returns JSON object with user entered values, attendees, class id and user_id fields.
 
 ```
 {
