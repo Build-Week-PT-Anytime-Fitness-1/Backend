@@ -14,11 +14,6 @@ Installing
 
 ---------------------------------
 
-## Usage
-
-### Base URL
-https://best-med-cabinet.herokuapp.com/
-
 ## **Authentication Routes**
 
 ### 1. User Registration
